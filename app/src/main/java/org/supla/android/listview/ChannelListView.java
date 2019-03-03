@@ -37,6 +37,7 @@ import android.widget.RelativeLayout;
 import org.supla.android.ChannelDetailRGB;
 import org.supla.android.ChannelDetailRS;
 import org.supla.android.ChannelDetailEM;
+import org.supla.android.ChannelDetailThermostat;
 import org.supla.android.ChannelDetailThermostatHP;
 import org.supla.android.R;
 import org.supla.android.db.Channel;
@@ -140,7 +141,13 @@ public class ChannelListView extends ListView {
                     break;
 
                 case SuplaConst.SUPLA_CHANNELFNC_THERMOSTAT:
-                case SuplaConst.SUPLA_CHANNELFNC_THERMOSTAT_HP_HOMEPLUS:
+
+                    if (!(mDetailLayout instanceof ChannelDetailThermostat))
+                        mDetailLayout = null;
+
+                    break;
+
+                case SuplaConst.SUPLA_CHANNELFNC_THERMOSTAT_HEATPOL_HOMEPLUS:
 
                     if (!(mDetailLayout instanceof ChannelDetailThermostatHP))
                         mDetailLayout = null;
@@ -166,7 +173,9 @@ public class ChannelListView extends ListView {
                     mDetailLayout = new ChannelDetailEM(getContext(), this);
                     break;
                 case SuplaConst.SUPLA_CHANNELFNC_THERMOSTAT:
-                case SuplaConst.SUPLA_CHANNELFNC_THERMOSTAT_HP_HOMEPLUS:
+                    mDetailLayout = new ChannelDetailThermostat(getContext(), this);
+                    break;
+                case SuplaConst.SUPLA_CHANNELFNC_THERMOSTAT_HEATPOL_HOMEPLUS:
                     mDetailLayout = new ChannelDetailThermostatHP(getContext(), this);
                     break;
             }
