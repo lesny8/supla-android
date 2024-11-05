@@ -1,35 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <!-- Note: this part should go to more generic nav activity
+       once new navigation model gets implemented in the rest
+       of the app. -->
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/nav_area"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/activity_bg"
-    tools:context="org.supla.android.CfgActivity">
+    android:background="@color/background">
 
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/cfg_content"
+      <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        app:defaultNavHost="true" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
+      <RelativeLayout
+        android:id="@+id/loadingIndicator"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:layout_height="match_parent"
+        android:background="@color/dialog_scrim"
+        android:visibility="gone">
 
-        <CheckBox
-            android:id="@+id/cfg_cb_advanced"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
-            android:buttonTint="@color/channel_btn"
-            android:text="@string/advanced_settings" />
-    </RelativeLayout>
+        <ProgressBar
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:indeterminate="true" />
+      </RelativeLayout>
+    </FrameLayout>
 
-</RelativeLayout>
+    <include layout="@layout/inc_toolbar" android:id="@+id/inc_toolbar" />
+
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

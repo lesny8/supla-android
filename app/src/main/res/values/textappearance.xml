@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="AppTheme.TextAppearance">
+    <item name="android:fontFamily">@font/open_sans_regular</item>
+    <item name="android:textColor">@color/on_background</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.Headline4">
+    <item name="android:fontFamily">@font/open_sans_regular</item>
+    <item name="android:textSize">34sp</item>
+    <item name="android:letterSpacing">0.025</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.Headline5">
+    <item name="android:fontFamily">@font/open_sans_regular</item>
+    <item name="android:textSize">24sp</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.Headline6">
+    <item name="android:fontFamily">@font/open_sans_regular</item>
+    <item name="android:textSize">20sp</item>
+    <item name="android:letterSpacing">0.015</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.Subtitle1">
+    <item name="android:fontFamily">@font/open_sans_regular</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:letterSpacing">0.015</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.Subtitle2">
+    <item name="android:fontFamily">@font/open_sans_medium</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:letterSpacing">0.01</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.Body1">
+    <item name="android:fontFamily">@font/open_sans_regular</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:letterSpacing">0.05</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.Body2">
+    <item name="android:fontFamily">@font/open_sans_regular</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:letterSpacing">0.025</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.Button">
+    <item name="android:fontFamily">@font/open_sans_medium</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+
+  <style name="AppTheme.TextAppearance.ListButton">
+    <item name="android:fontFamily">@font/open_sans_regular</item>
+    <item name="android:textSize">@dimen/channel_btn_text_size</item>
+    <item name="android:textColor">@color/on_primary</item>
+  </style>
+</resources>

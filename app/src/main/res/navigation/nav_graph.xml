@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/nav_graph"
+  app:startDestination="@id/cfgProfiles">
+
+  <fragment
+    android:id="@+id/cfgAuth"
+    android:name="org.supla.android.features.createaccount.CreateAccountFragment"
+    android:label="@string/menubar_title">
+    <action
+      android:id="@+id/createAccount"
+      app:destination="@id/webContentCreateAccount" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/cfgEditProfile"
+    android:name="org.supla.android.features.createaccount.CreateAccountFragment"
+    android:label="@string/edit_account" />
+
+  <fragment
+    android:id="@+id/cfgNewProfile"
+    android:name="org.supla.android.features.createaccount.CreateAccountFragment"
+    android:label="@string/add_account" />
+
+  <fragment
+    android:id="@+id/cfgProfiles"
+    android:name="org.supla.android.cfg.ProfilesFragment"
+    android:label="@string/profiles_title">
+    <action
+      android:id="@+id/editProfile"
+      app:destination="@id/cfgEditProfile" />
+    <action
+      android:id="@+id/newProfile"
+      app:destination="@id/cfgNewProfile" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/webContentCreateAccount"
+    android:name="org.supla.android.features.createaccountweb.CreateAccountWebFragment"
+    android:label="@string/menubar_title" />
+
+  <fragment
+    android:id="@+id/webContentDeleteAccount"
+    android:name="org.supla.android.features.deleteaccountweb.DeleteAccountWebFragment"
+    android:label="" />
+
+  <fragment
+    android:id="@+id/config_lock_screen_fragment"
+    android:name="org.supla.android.features.lockscreen.LockScreenFragment" />
+
+</navigation>

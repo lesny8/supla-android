@@ -1,172 +1,159 @@
 package org.supla.android.db;
+
 /*
- Copyright (C) AC SOFTWARE SP. Z O.O.
+Copyright (C) AC SOFTWARE SP. Z O.O.
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- */
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
-
-import org.supla.android.lib.SuplaChannelElectricityMeterValue;
-import org.supla.android.lib.SuplaChannelExtendedValue;
-import org.supla.android.lib.SuplaChannelImpulseCounterValue;
-import org.supla.android.lib.SuplaChannelState;
-import org.supla.android.lib.SuplaChannelThermostatValue;
-import org.supla.android.lib.SuplaConst;
-
+import androidx.annotation.Nullable;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Date;
+import org.supla.android.data.source.local.entity.ChannelExtendedValueEntity;
+import org.supla.android.lib.SuplaChannelExtendedValue;
 
 public class ChannelExtendedValue extends DbItem {
-    private int ChannelId;
-    private SuplaChannelExtendedValue ExtendedValue;
+  private int ChannelId;
+  private long profileId;
+  private Long timerStartTimestamp;
 
-    public static boolean valueExists(Cursor cursor) {
-        int vidx = cursor.getColumnIndex(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_VALUE);
+  private SuplaChannelExtendedValue ExtendedValue;
 
-        return cursor.getColumnIndex(SuplaContract.ChannelExtendedValueEntry._ID) > -1
-                && cursor.getColumnIndex(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_CHANNELID) > -1
-                && cursor.getColumnIndex(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_TYPE) > -1
-                && vidx > -1
-                && !cursor.isNull(vidx);
+  public static boolean valueExists(Cursor cursor) {
+    int vidx = cursor.getColumnIndex(ChannelExtendedValueEntity.COLUMN_VALUE);
+
+    return cursor.getColumnIndex(ChannelExtendedValueEntity.COLUMN_ID) > -1
+        && cursor.getColumnIndex(ChannelExtendedValueEntity.COLUMN_CHANNEL_ID) > -1
+        && vidx > -1
+        && !cursor.isNull(vidx);
+  }
+
+  public int getChannelId() {
+    return ChannelId;
+  }
+
+  public void setChannelId(int channelId) {
+    ChannelId = channelId;
+  }
+
+  public long getProfileId() {
+    return profileId;
+  }
+
+  public void setProfileId(long pid) {
+    profileId = pid;
+  }
+
+  @Nullable
+  public Long getTimerStartTimestamp() {
+    return timerStartTimestamp;
+  }
+
+  public void setTimerStartTimestamp(@Nullable Long timestamp) {
+    timerStartTimestamp = timestamp;
+  }
+
+  public SuplaChannelExtendedValue getExtendedValue() {
+    return ExtendedValue;
+  }
+
+  public Date getTimerEstimatedEndDate() {
+    if (ExtendedValue == null) {
+      return null;
+    }
+    if (ExtendedValue.TimerStateValue == null) {
+      return null;
     }
 
-    public int getChannelId() {
-        return ChannelId;
+    return ExtendedValue.TimerStateValue.getCountdownEndsAt();
+  }
+
+  public void setExtendedValue(SuplaChannelExtendedValue extendedValue) {
+    ExtendedValue = extendedValue;
+  }
+
+  private Object ByteArrayToObject(byte[] value) {
+    try {
+      ByteArrayInputStream byteStream = new ByteArrayInputStream(value);
+      ObjectInputStream objectStream = new ObjectInputStream(byteStream);
+      return objectStream.readObject();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
     }
 
-    public void setChannelId(int channelId) {
-        ChannelId = channelId;
+    return null;
+  }
+
+  @SuppressLint("Range")
+  public void AssignCursorData(Cursor cursor) {
+    setId(cursor.getLong(cursor.getColumnIndex(ChannelExtendedValueEntity.COLUMN_ID)));
+    setChannelId(
+        cursor.getInt(cursor.getColumnIndex(ChannelExtendedValueEntity.COLUMN_CHANNEL_ID)));
+    setProfileId(
+        cursor.getLong(cursor.getColumnIndex(ChannelExtendedValueEntity.COLUMN_PROFILE_ID)));
+    try {
+      setTimerStartTimestamp(
+          cursor.getLong(
+              cursor.getColumnIndex(ChannelExtendedValueEntity.COLUMN_TIMER_START_TIME)));
+    } catch (Exception ex) {
+      setTimerStartTimestamp(null);
     }
 
-    public SuplaChannelExtendedValue getExtendedValue() {
-        return ExtendedValue;
+    byte[] value = cursor.getBlob(cursor.getColumnIndex(ChannelExtendedValueEntity.COLUMN_VALUE));
+    Object obj = ByteArrayToObject(value);
+
+    if (obj instanceof SuplaChannelExtendedValue) {
+      ExtendedValue = (SuplaChannelExtendedValue) obj;
+    } else {
+      ExtendedValue = new SuplaChannelExtendedValue();
+    }
+  }
+
+  private byte[] ObjectToByteArray(Object obj) {
+    byte[] value = new byte[0];
+    try {
+      ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+      ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
+      objectStream.writeObject(obj);
+      objectStream.close();
+      value = byteStream.toByteArray();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
-    public void setExtendedValue(SuplaChannelExtendedValue extendedValue) {
-        ExtendedValue = extendedValue;
-    }
+    return value;
+  }
 
-    public int getType() {
-        return ExtendedValue == null ? 0 : ExtendedValue.Type;
-    }
+  public ContentValues getContentValues() {
 
-    private Object ByteArrayToObject(byte[] value) {
-        try {
-            ByteArrayInputStream byteStream = new ByteArrayInputStream(value);
-            ObjectInputStream objectStream = new ObjectInputStream(byteStream);
-            return objectStream.readObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    ContentValues values = new ContentValues();
 
-        return null;
-    }
+    values.put(ChannelExtendedValueEntity.COLUMN_CHANNEL_ID, getChannelId());
+    values.put(ChannelExtendedValueEntity.COLUMN_VALUE, ObjectToByteArray(ExtendedValue));
+    values.put(ChannelExtendedValueEntity.COLUMN_PROFILE_ID, getProfileId());
+    values.put(ChannelExtendedValueEntity.COLUMN_TIMER_START_TIME, getTimerStartTimestamp());
 
-    public void AssignCursorData(Cursor cursor) {
-        setId(cursor.getLong(cursor.getColumnIndex(SuplaContract.ChannelExtendedValueEntry._ID)));
-        setChannelId(cursor.getInt(cursor.getColumnIndex(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_CHANNELID)));
-
-        if (ExtendedValue == null) {
-            ExtendedValue = new SuplaChannelExtendedValue();
-        }
-
-        ExtendedValue.Type = cursor.getInt(cursor.getColumnIndex(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_TYPE));
-        byte[] value = cursor.getBlob(cursor.getColumnIndex(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_VALUE));
-        Object obj = ByteArrayToObject(value);
-
-        switch (getType()) {
-            case SuplaConst.EV_TYPE_ELECTRICITY_METER_MEASUREMENT_V1:
-            case SuplaConst.EV_TYPE_ELECTRICITY_METER_MEASUREMENT_V2:
-                if (obj instanceof SuplaChannelElectricityMeterValue) {
-                    ExtendedValue.ElectricityMeterValue = (SuplaChannelElectricityMeterValue) obj;
-                }
-                break;
-            case SuplaConst.EV_TYPE_IMPULSE_COUNTER_DETAILS_V1:
-                if (obj instanceof SuplaChannelImpulseCounterValue) {
-                    ExtendedValue.ImpulseCounterValue = (SuplaChannelImpulseCounterValue) obj;
-                }
-                break;
-            case SuplaConst.EV_TYPE_THERMOSTAT_DETAILS_V1:
-                if (obj instanceof SuplaChannelThermostatValue) {
-                    ExtendedValue.ThermostatValue = (SuplaChannelThermostatValue) obj;
-                }
-                break;
-            case SuplaConst.EV_TYPE_CHANNEL_STATE_V1:
-                if (obj instanceof SuplaChannelState) {
-                    ExtendedValue.ChannelStateValue = (SuplaChannelState) obj;
-                }
-                break;
-            default:
-                ExtendedValue.Value = value;
-                break;
-        }
-    }
-
-    private byte[] ObjectToByteArray(Object obj) {
-        byte[] value = new byte[0];
-        try {
-            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-            ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
-            objectStream.writeObject(obj);
-            objectStream.close();
-            value = byteStream.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return value;
-    }
-
-    public ContentValues getContentValues() {
-
-        ContentValues values = new ContentValues();
-
-        values.put(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_CHANNELID, getChannelId());
-        values.put(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_TYPE, getType());
-
-        byte[] value = new byte[0];
-
-        switch (getType()) {
-            case SuplaConst.EV_TYPE_ELECTRICITY_METER_MEASUREMENT_V1:
-            case SuplaConst.EV_TYPE_ELECTRICITY_METER_MEASUREMENT_V2:
-                value = ObjectToByteArray(ExtendedValue.ElectricityMeterValue);
-                break;
-            case SuplaConst.EV_TYPE_IMPULSE_COUNTER_DETAILS_V1:
-                value = ObjectToByteArray(ExtendedValue.ImpulseCounterValue);
-                break;
-            case SuplaConst.EV_TYPE_THERMOSTAT_DETAILS_V1:
-                value = ObjectToByteArray(ExtendedValue.ThermostatValue);
-                break;
-            case SuplaConst.EV_TYPE_CHANNEL_STATE_V1:
-                value = ObjectToByteArray(ExtendedValue.ChannelStateValue);
-                break;
-            default:
-                if (ExtendedValue != null && ExtendedValue.Value != null) {
-                    value = ExtendedValue.Value;
-                }
-                break;
-        }
-
-        values.put(SuplaContract.ChannelExtendedValueEntry.COLUMN_NAME_VALUE, value);
-        return values;
-    }
+    return values;
+  }
 }

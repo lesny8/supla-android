@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary">#12a71e</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="secondary">#54A6FF</color>
+    <color name="primary_container">#003910</color>
+    <color name="on_primary_container">#E4E4E4</color>
+    <color name="surface">#262626</color>
+    <color name="on_surface">#E4E4E4</color>
+    <color name="surface_variant">#191B1A</color>
+    <color name="on_surface_variant">#B2B2B2</color>
+    <color name="background">#131313</color>
+    <color name="on_background">#FCFCFC</color>
+    <color name="outline">#565656</color>
+    <color name="outline_variant">#363636</color>
+    <color name="secondary_container">#03162C</color>
+
+    <color name="disabled">#4E5255</color>
+    <color name="disabledOverlay">#BB242725</color>
+    <color name="separator">#000000</color>
+    <color name="old_switch_track">#42d3d2d2</color>
+    <color name="error">#EF6153</color>
+    <color name="error_container">#270603</color>
+    <color name="supla_button_background_outside">#131313</color>
+    <color name="supla_button_inner_shadow">#00000000</color>
+
+    <color name="gray_light">#424343</color>
+    <color name="gray_lighter">#3D3D3E</color>
+    <color name="light_orange">#cca77b</color>
+    <color name="light_blue">#707ecc</color>
+    <color name="light_green">#8db386</color>
+    <color name="light_red">#cc8870</color>
+    <color name="dark_blue">#6666b3</color>
+    <color name="dark_red">#b36666</color>
+    <color name="chart_pie_1">#834E24</color>
+    <color name="chart_pie_2">#678002</color>
+    <color name="chart_pie_3">#1E8D80</color>
+    <color name="chart_pie_4">#D12525</color>
+    <color name="chart_pie_5">#388100</color>
+    <color name="chart_pie_6">#70070F</color>
+    <color name="chart_pie_7">#006B83</color>
+    <color name="chart_pie_8">#81683D</color>
+    <color name="chart_pie_9">#288532</color>
+    <color name="chart_pie_10">#B84D00</color>
+    <color name="chart_pie_11">#727478</color>
+    <color name="chart_pie_12">#4D6941</color>
+    <color name="chart_pie_13">#A57700</color>
+    <color name="chart_pie_14">#002F56</color>
+    <color name="chart_pie_15">#1F5F64</color>
+    <color name="chart_pie_16">#6546A6</color>
+    <color name="chart_pie_17">#4309A1</color>
+    <color name="chart_pie_18">#AF2A6A</color>
+    <color name="chart_pie_19">#0D397D</color>
+    <color name="chart_pie_20">#A600C1</color>
+    <color name="chart_pie_21">#C53B00</color>
+    <color name="chart_pie_22">#217F5F</color>
+    <color name="chart_pie_23">#6E5D00</color>
+    <color name="chart_pie_24">#7D015A</color>
+
+    <color name="layout_background">#171717</color>
+    <color name="field_background">#3D3D3E</color>
+    <color name="segmented_field_background">#101010</color>
+
+    <color name="widget_fields_border">#4E5255</color>
+    <color name="widget_spinner_item_background">#262627</color>
+
+    <color name="dialog_scrim">#BB171717</color>
+    <color name="info_scrim">#BB171717</color>
+
+    <!-- Roller shutter -->
+    <color name="roller_shutter_window_color">#363738</color>
+    <color name="roller_shutter_glass_top_color">#011C2B</color>
+    <color name="roller_shutter_glass_bottom_color">#5A6781</color>
+    <color name="roller_shutter_slat_background">#7E8082</color>
+    <color name="roller_shutter_slat_border">#000000</color>
+    <color name="roller_shutter_disabled_overlay">#BB171717</color>
+
+    <!-- Garage door -->
+    <color name="garage_door_car">#191C19</color>
+
+    <!-- Thermostat -->
+    <color name="thermostat_control_circle_background">#313131</color>
+
+    <!-- Other -->
+    <color name="vl_infotext">#808080</color>
+</resources>
