@@ -87,16 +87,17 @@ class SceneListViewModel @Inject constructor(
   fun onAddGroupClick() {
     loadServerUrl {
       when (it) {
-        is CloudUrl.SuplaCloud -> sendEvent(SceneListViewEvent.NavigateToSuplaCloud)
-        is CloudUrl.PrivateCloud -> sendEvent(SceneListViewEvent.NavigateToPrivateCloud(it.url))
+        is CloudUrl.DefaultCloud -> sendEvent(SceneListViewEvent.NavigateToSuplaCloud)
+        is CloudUrl.ServerUri -> sendEvent(SceneListViewEvent.NavigateToPrivateCloud(it.url))
       }
     }
   }
 }
 
 sealed class SceneListViewEvent : ViewEvent {
-  object ReassignAdapter : SceneListViewEvent()
-  object NavigateToSuplaCloud : SceneListViewEvent()
+  data object ReassignAdapter : SceneListViewEvent()
+  data object NavigateToSuplaCloud : SceneListViewEvent()
+  data object NavigateToSuplaBetaCloud : SceneListViewEvent()
   data class NavigateToPrivateCloud(val url: Uri) : SceneListViewEvent()
 }
 

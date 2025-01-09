@@ -28,7 +28,6 @@ import org.junit.Test
 import org.supla.android.R
 import org.supla.android.data.model.general.IconType
 import org.supla.android.data.source.local.entity.ChannelRelationEntity
-import org.supla.android.data.source.local.entity.ChannelRelationType
 import org.supla.android.data.source.local.entity.complex.ChannelChildEntity
 import org.supla.android.data.source.local.entity.complex.ChannelDataEntity
 import org.supla.android.data.source.local.entity.custom.ChannelWithChildren
@@ -37,7 +36,10 @@ import org.supla.android.images.ImageId
 import org.supla.android.usecases.channel.GetChannelValueStringUseCase
 import org.supla.android.usecases.channel.ValueType
 import org.supla.android.usecases.icon.GetChannelIconUseCase
-import org.supla.core.shared.data.SuplaChannelFunction
+import org.supla.core.shared.data.model.channel.ChannelRelationType
+import org.supla.core.shared.data.model.general.Channel
+import org.supla.core.shared.data.model.general.SuplaFunction
+import org.supla.core.shared.usecase.channel.GetChannelBatteryIconUseCase
 
 class CreateTemperaturesListUseCaseTest {
 
@@ -46,6 +48,9 @@ class CreateTemperaturesListUseCaseTest {
 
   @MockK
   private lateinit var getChannelValueStringUseCase: GetChannelValueStringUseCase
+
+  @MockK
+  private lateinit var getChannelBatteryIconUseCase: GetChannelBatteryIconUseCase
 
   @InjectMockKs
   lateinit var useCase: CreateTemperaturesListUseCase
@@ -61,11 +66,13 @@ class CreateTemperaturesListUseCaseTest {
     val child1ImageId: ImageId = mockk()
     val child2ImageId: ImageId = mockk()
     val child1 =
-      createChild(ChannelRelationType.MAIN_THERMOMETER, 111, "11.0", SuplaChannelFunction.HUMIDITY_AND_TEMPERATURE, "12.0", child1ImageId)
+      createChild(ChannelRelationType.MAIN_THERMOMETER, 111, "11.0", SuplaFunction.HUMIDITY_AND_TEMPERATURE, "12.0", child1ImageId)
     val child2 = createChild(ChannelRelationType.AUX_THERMOMETER_FLOOR, 222, "22.0", imageId = child2ImageId)
 
     val channelWithChildren: ChannelWithChildren = mockk()
     every { channelWithChildren.children } returns listOf(child1, child2)
+
+    every { getChannelBatteryIconUseCase.invoke(any<Channel>()) } returns null
 
     // when
     val temperatures = useCase.invoke(channelWithChildren)
@@ -104,6 +111,8 @@ class CreateTemperaturesListUseCaseTest {
     val channelWithChildren: ChannelWithChildren = mockk()
     every { channelWithChildren.children } returns listOf(child2)
 
+    every { getChannelBatteryIconUseCase.invoke(any<Channel>()) } returns null
+
     // when
     val temperatures = useCase.invoke(channelWithChildren)
 
@@ -120,7 +129,7 @@ class CreateTemperaturesListUseCaseTest {
     relationType: ChannelRelationType,
     remoteId: Int,
     text: String,
-    function: SuplaChannelFunction = SuplaChannelFunction.THERMOMETER,
+    function: SuplaFunction = SuplaFunction.THERMOMETER,
     secondValue: String? = null,
     imageId: ImageId = mockk()
   ): ChannelChildEntity {
@@ -130,6 +139,12 @@ class CreateTemperaturesListUseCaseTest {
     val channel = mockk<ChannelDataEntity>()
     every { channel.remoteId } returns remoteId
     every { channel.function } returns function
+    every { channel.caption } returns ""
+    every { channel.stateEntity } returns null
+    every { channel.isOnline() } returns true
+    every { channel.channelValueEntity } returns mockk {
+      every { getValueAsByteArray() } returns byteArrayOf()
+    }
 
     every { getChannelValueStringUseCase.invoke(channel, withUnit = false) } returns text
     secondValue?.let { every { getChannelValueStringUseCase.invoke(channel, ValueType.SECOND, withUnit = false) } returns secondValue }

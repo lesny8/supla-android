@@ -17,46 +17,63 @@ package org.supla.core.shared.usecase
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-import org.supla.core.shared.data.SuplaChannelFunction
-import org.supla.core.shared.infrastructure.LocalizedString
+import org.supla.core.shared.data.model.general.SuplaFunction
+import org.supla.core.shared.infrastructure.LocalizedStringId
 
 class GetChannelActionStringUseCase {
-  fun rightButton(function: SuplaChannelFunction): LocalizedString? =
+  fun rightButton(function: SuplaFunction): LocalizedStringId? =
     when (function) {
-      SuplaChannelFunction.CONTROLLING_THE_ROOF_WINDOW,
-      SuplaChannelFunction.ROLLER_GARAGE_DOOR -> LocalizedString.GENERAL_OPEN
+      SuplaFunction.CONTROLLING_THE_ROOF_WINDOW,
+      SuplaFunction.ROLLER_GARAGE_DOOR,
+      SuplaFunction.CONTROLLING_THE_DOOR_LOCK,
+      SuplaFunction.CONTROLLING_THE_GATEWAY_LOCK,
+      SuplaFunction.VALVE_OPEN_CLOSE,
+      SuplaFunction.VALVE_PERCENTAGE -> LocalizedStringId.GENERAL_OPEN
 
-      SuplaChannelFunction.CONTROLLING_THE_FACADE_BLIND,
-      SuplaChannelFunction.CONTROLLING_THE_ROLLER_SHUTTER,
-      SuplaChannelFunction.VERTICAL_BLIND,
-      SuplaChannelFunction.CURTAIN -> LocalizedString.GENERAL_REVEAL
+      SuplaFunction.CONTROLLING_THE_GATE,
+      SuplaFunction.CONTROLLING_THE_GARAGE_DOOR -> LocalizedStringId.GENERAL_OPEN_CLOSE
 
-      SuplaChannelFunction.TERRACE_AWNING,
-      SuplaChannelFunction.PROJECTOR_SCREEN -> LocalizedString.GENERAL_COLLAPSE
+      SuplaFunction.CONTROLLING_THE_FACADE_BLIND,
+      SuplaFunction.CONTROLLING_THE_ROLLER_SHUTTER,
+      SuplaFunction.VERTICAL_BLIND,
+      SuplaFunction.CURTAIN -> LocalizedStringId.GENERAL_REVEAL
 
-      SuplaChannelFunction.POWER_SWITCH,
-      SuplaChannelFunction.LIGHTSWITCH,
-      SuplaChannelFunction.STAIRCASE_TIMER -> LocalizedString.GENERAL_TURN_ON
+      SuplaFunction.TERRACE_AWNING,
+      SuplaFunction.PROJECTOR_SCREEN -> LocalizedStringId.GENERAL_COLLAPSE
+
+      SuplaFunction.POWER_SWITCH,
+      SuplaFunction.LIGHTSWITCH,
+      SuplaFunction.STAIRCASE_TIMER,
+      SuplaFunction.RGB_LIGHTING,
+      SuplaFunction.DIMMER,
+      SuplaFunction.DIMMER_AND_RGB_LIGHTING,
+      SuplaFunction.THERMOSTAT_HEATPOL_HOMEPLUS -> LocalizedStringId.GENERAL_TURN_ON
 
       else -> null
     }
 
-  fun leftButton(function: SuplaChannelFunction): LocalizedString? =
+  fun leftButton(function: SuplaFunction): LocalizedStringId? =
     when (function) {
-      SuplaChannelFunction.CONTROLLING_THE_ROOF_WINDOW,
-      SuplaChannelFunction.ROLLER_GARAGE_DOOR -> LocalizedString.GENERAL_CLOSE
+      SuplaFunction.CONTROLLING_THE_ROOF_WINDOW,
+      SuplaFunction.ROLLER_GARAGE_DOOR,
+      SuplaFunction.VALVE_OPEN_CLOSE,
+      SuplaFunction.VALVE_PERCENTAGE -> LocalizedStringId.GENERAL_CLOSE
 
-      SuplaChannelFunction.CONTROLLING_THE_FACADE_BLIND,
-      SuplaChannelFunction.CONTROLLING_THE_ROLLER_SHUTTER,
-      SuplaChannelFunction.VERTICAL_BLIND,
-      SuplaChannelFunction.CURTAIN -> LocalizedString.GENERAL_SHUT
+      SuplaFunction.CONTROLLING_THE_FACADE_BLIND,
+      SuplaFunction.CONTROLLING_THE_ROLLER_SHUTTER,
+      SuplaFunction.VERTICAL_BLIND,
+      SuplaFunction.CURTAIN -> LocalizedStringId.GENERAL_SHUT
 
-      SuplaChannelFunction.TERRACE_AWNING,
-      SuplaChannelFunction.PROJECTOR_SCREEN -> LocalizedString.GENERAL_EXPAND
+      SuplaFunction.TERRACE_AWNING,
+      SuplaFunction.PROJECTOR_SCREEN -> LocalizedStringId.GENERAL_EXPAND
 
-      SuplaChannelFunction.POWER_SWITCH,
-      SuplaChannelFunction.LIGHTSWITCH,
-      SuplaChannelFunction.STAIRCASE_TIMER -> LocalizedString.GENERAL_TURN_OFF
+      SuplaFunction.POWER_SWITCH,
+      SuplaFunction.LIGHTSWITCH,
+      SuplaFunction.STAIRCASE_TIMER,
+      SuplaFunction.RGB_LIGHTING,
+      SuplaFunction.DIMMER,
+      SuplaFunction.DIMMER_AND_RGB_LIGHTING,
+      SuplaFunction.THERMOSTAT_HEATPOL_HOMEPLUS -> LocalizedStringId.GENERAL_TURN_OFF
 
       else -> null
     }

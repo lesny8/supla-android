@@ -24,7 +24,6 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import org.supla.android.data.model.general.NightModeSetting;
 import org.supla.android.data.source.runtime.appsettings.TemperatureUnit;
 
 public class Preferences {
@@ -43,7 +42,6 @@ public class Preferences {
   private static final String pref_show_bottom_label = "pref_show_bottom_label";
   private static final String pref_show_bottom_menu = "pref_show_bottom_menu";
   private static final String pref_show_opening_percent = "pref_show_opening_percent";
-  private static final String pref_night_mode = "pref_night_mode";
 
   private static final String pref_chart_type = "pref_ct%d_prof%d_%d";
 
@@ -53,6 +51,10 @@ public class Preferences {
   private static final String pref_notifications_asked = "pref_notifications_asked";
   private static final String pref_should_show_new_gesture_info =
       "pref_should_show_new_gesture_info";
+  private static final String pref_should_show_em_history_introduction =
+      "pref_should_show_em_history_introduction";
+  private static final String pref_should_show_em_general_introduction =
+      "pref_should_show_em_general_introduction";
 
   private final SharedPreferences _prefs;
 
@@ -258,13 +260,20 @@ public class Preferences {
     _prefs.edit().putBoolean(pref_should_show_new_gesture_info, true).apply();
   }
 
-  public NightModeSetting getNightMode() {
-    return NightModeSetting.Companion.from(
-        _prefs.getInt(pref_night_mode, NightModeSetting.UNSET.getValue()));
+  public boolean shouldShowEmHistoryIntroduction() {
+    return _prefs.getBoolean(pref_should_show_em_history_introduction, true);
   }
 
-  public void setNightMode(NightModeSetting setting) {
-    _prefs.edit().putInt(pref_night_mode, setting.getValue()).apply();
+  public void setEmHistoryIntroductionShown() {
+    _prefs.edit().putBoolean(pref_should_show_em_history_introduction, false).apply();
+  }
+
+  public boolean shouldShowEmGeneralIntroduction() {
+    return _prefs.getBoolean(pref_should_show_em_general_introduction, true);
+  }
+
+  public void setEmGeneralIntroductionShown() {
+    _prefs.edit().putBoolean(pref_should_show_em_general_introduction, false).apply();
   }
 
   public void registerChangeListener(OnSharedPreferenceChangeListener listener) {

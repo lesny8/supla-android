@@ -21,6 +21,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.kotlin.subscribeBy
+import org.supla.android.Preferences
 import org.supla.android.R
 import org.supla.android.core.infrastructure.DateProvider
 import org.supla.android.core.storage.UserStateHolder
@@ -45,7 +46,6 @@ import org.supla.android.data.source.remote.channel.SuplaChannelFlag
 import org.supla.android.data.source.remote.channel.suplaFlags
 import org.supla.android.events.DownloadEventsManager
 import org.supla.android.extensions.guardLet
-import org.supla.android.extensions.ifTrue
 import org.supla.android.features.details.detailbase.history.BaseHistoryDetailViewModel
 import org.supla.android.features.details.detailbase.history.HistoryDetailViewState
 import org.supla.android.features.details.detailbase.history.ui.ChartDataSelectionDialogState
@@ -61,6 +61,7 @@ import org.supla.android.usecases.channel.LoadChannelMeasurementsUseCase
 import org.supla.android.usecases.channel.ReadChannelByRemoteIdUseCase
 import org.supla.android.usecases.channel.measurementsprovider.electricity.ElectricityChartFilters
 import org.supla.android.usecases.channel.measurementsprovider.electricity.PhaseItem
+import org.supla.core.shared.extensions.ifTrue
 import javax.inject.Inject
 
 private val DEFAULT_PHASES = PhaseItem.entries.toSet()
@@ -74,6 +75,7 @@ class ElectricityMeterHistoryViewModel @Inject constructor(
   private val downloadEventsManager: DownloadEventsManager,
   private val userStateHolder: UserStateHolder,
   private val profileManager: ProfileManager,
+  private val preferences: Preferences,
   deleteChannelMeasurementsUseCase: DeleteChannelMeasurementsUseCase,
   dateProvider: DateProvider,
   schedulers: SuplaSchedulers
@@ -207,6 +209,11 @@ class ElectricityMeterHistoryViewModel @Inject constructor(
 
   override fun allAggregations() = ChartDataAggregation.entries
 
+  fun closeIntroduction() {
+    preferences.setEmHistoryIntroductionShown()
+    updateState { it.copy(introductionPages = null) }
+  }
+
   private fun handleData(channel: ChannelDataEntity, chartState: ChartState) {
     updateState { it.copy(profileId = channel.profileId, channelFunction = channel.function.value) }
 
@@ -214,6 +221,15 @@ class ElectricityMeterHistoryViewModel @Inject constructor(
     restoreRange(chartState)
     configureDownloadObserver(channel.remoteId)
     startInitialDataLoad(channel.remoteId, channel.profileId, channel.function.value)
+
+    if (preferences.shouldShowEmHistoryIntroduction()) {
+      val pages = if (channel.Electricity.phases.size > 1) {
+        listOf(IntroductionPage.FIRST_FOR_MULTI_PHASE, IntroductionPage.SECOND)
+      } else {
+        listOf(IntroductionPage.FIRST_FOR_SINGLE_PHASE, IntroductionPage.SECOND)
+      }
+      updateState { it.copy(introductionPages = pages) }
+    }
   }
 
   private fun startInitialDataLoad(remoteId: Int, profileId: Long, channelFunction: Int) {

@@ -30,6 +30,7 @@ import org.supla.android.extensions.visibleIf
 import org.supla.android.lib.SuplaClientMessageHandler
 import org.supla.android.lib.SuplaClientMessageHandler.OnSuplaClientMessageListener
 import org.supla.android.lib.SuplaClientMsg
+import org.supla.android.ui.AppBar
 import org.supla.android.ui.LoadableContent
 import org.supla.android.ui.ToolbarItemsClickHandler
 import org.supla.android.ui.ToolbarItemsController
@@ -44,6 +45,9 @@ abstract class BaseFragment<S : ViewState, E : ViewEvent>(@LayoutRes contentLayo
   constructor() : this(0)
 
   protected abstract val viewModel: BaseViewModel<S, E>
+
+  protected val viewState: S
+    get() = viewModel.getViewState().value
 
   @OptIn(FlowPreview::class)
   @CallSuper
@@ -87,6 +91,10 @@ abstract class BaseFragment<S : ViewState, E : ViewEvent>(@LayoutRes contentLayo
   }
 
   protected fun setToolbarTitle(title: String) {
+    (activity as? ToolbarTitleController)?.setToolbarTitle(AppBar.Title.Text(title))
+  }
+
+  protected fun setToolbarTitle(title: AppBar.Title) {
     (activity as? ToolbarTitleController)?.setToolbarTitle(title)
   }
 

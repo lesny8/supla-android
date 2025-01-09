@@ -27,8 +27,9 @@
   <string name="about">O programie</string>
   <string name="settings">Ustawienia</string>
   <string name="add_device">Dodaj urządzenie</string>
-  <string name="menu_notifications" translatable="false">Historia powiadomień</string>
+  <string name="menu_notifications">Historia powiadomień</string>
 
+  <string name="channel_state_uptime">%1$d dni %2$02d:%3$02d:%4$02d</string>
   <string name="status_connecting">Łączenie...</string>
   <string name="status_unknown_err">Nieznany błąd</string>
   <string name="status_temporarily_unavailable">Usługa tymczasowo niedostępna</string>
@@ -91,17 +92,17 @@
   <string name="advanced_settings">Zaawansowane</string>
   <string name="create_account"><u>Utwórz konto</u></string>
 
-  <string name="cfg_profile_active_indicator" translatable="false">aktywny</string>
+  <string name="cfg_profile_active_indicator">aktywny</string>
 
   <string name="cfg_label_email_auth">Email</string>
   <string name="cfg_label_access_id_auth">Identyfikator</string>
-  <string name="cfg_channel_height" translatable="false">Wysokość kanału</string>
-  <string name="cfg_temperature_unit" translatable="false">Jednostka temperatury</string>
-  <string name="cfg_button_autohide" translatable="false">Auto-ukrywanie przycisków</string>
+  <string name="cfg_channel_height">Wysokość kanału</string>
+  <string name="cfg_temperature_unit">Jednostka temperatury</string>
+  <string name="cfg_button_autohide">Auto-ukrywanie przycisków</string>
 
-  <string name="profile" translatable="false">Twoje konto</string>
-  <string name="profile_plural" translatable="false">Twoje konta</string>
-  <string name="menubar_appsettings" translatable="false">Ustawienia aplikacji</string>
+  <string name="profile">Twoje konto</string>
+  <string name="profile_plural">Twoje konta</string>
+  <string name="menubar_appsettings">Ustawienia aplikacji</string>
 
   <string name="about_app">Ten program jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i / lub
     modyfikować zgodnie z warunkami licencji GNU General Public License
@@ -455,26 +456,26 @@
   <string name="widget_scene">scena</string>
   <string name="widget_action_toggle">Przełącz</string>
 
-  <string name="lastconnectionresetcause_unknown" translatable="false">0: nieznany</string>
-  <string name="lastconnectionresetcause_activity_timeout" translatable="false">1: brak odpowiedzi serwera</string>
-  <string name="lastconnectionresetcause_wifi_connection_lost" translatable="false">2: utrata połączenia WiFi</string>
-  <string name="lastconnectionresetcause_server_connection_lost" translatable="false">3: reset połączenia z serwerem</string>
-  <string name="basic_profile_warning" translatable="false">Tryb niedostępny</string>
-  <string name="basic_config_unavailable" translatable="false">Przed wyłączeniem trybu zaawansowanego wybierz uwierzytelnianie email z automatycznym wykrywaniem serwera.</string>
-  <string name="add_device_warning" translatable="false">Kreator automatycznego dodawania urządzeń nie jest dostępny w trybie uwierzytelniania identyfikatorem dostępu. Urządzenia mogą być wówczas dodawane ręcznie.</string>
-  <string name="show_channel_info" translatable="false">Pokazywanie
+  <string name="lastconnectionresetcause_unknown">0: nieznany</string>
+  <string name="lastconnectionresetcause_activity_timeout">1: brak odpowiedzi serwera</string>
+  <string name="lastconnectionresetcause_wifi_connection_lost">2: utrata połączenia WiFi</string>
+  <string name="lastconnectionresetcause_server_connection_lost">3: reset połączenia z serwerem</string>
+  <string name="basic_profile_warning">Tryb niedostępny</string>
+  <string name="basic_config_unavailable">Przed wyłączeniem trybu zaawansowanego wybierz uwierzytelnianie email z automatycznym wykrywaniem serwera.</string>
+  <string name="add_device_warning">Kreator automatycznego dodawania urządzeń nie jest dostępny w trybie uwierzytelniania identyfikatorem dostępu. Urządzenia mogą być wówczas dodawane ręcznie.</string>
+  <string name="show_channel_info">Pokazywanie
     przycisku ⓘ</string>
-  <string name="add_device_needs_cloud_title" translatable="false">Konfiguracja urządzenia</string>
-  <string name="add_device_needs_cloud_message" translatable="false">To urządzenie nie ma żadnych kanałów widocznych w aplikacji. Aby dokończyć konfigurację przejdź do cloud.supla.org</string>
-  <string name="add_device_needs_cloud_dismiss" translatable="false">Rozumiem</string>
-  <string name="add_device_needs_cloud_go" translatable="false">Przejdź do CLOUD</string>
-  <string name="associeted_with_at_error" translatable="false">Nie można zmienić funkcji kanału powiązanego z wyzwalaczem akcji.</string>
-  <string name="associeted_with_push_error" translatable="false">Nie można zmienić funkcji kanału powiązanego z powiadomieniami PUSH.</string>
-  <string name="associeted_with_vbt_error" translatable="false">Nie można zmienić funkcji kanału powiązanego z reakcjami.</string>
-  <string name="location_ordering" translatable="false">Kolejność lokalizacji</string>
-  <string name="rs_display_mode" translatable="false">Rolety, żaluzje, zasłony %</string>
-  <string name="rs_display_mode_opening" translatable="false">Otwarcia</string>
-  <string name="rs_display_mode_closing" translatable="false">Zamknięcia</string>
+  <string name="add_device_needs_cloud_title">Konfiguracja urządzenia</string>
+  <string name="add_device_needs_cloud_message">To urządzenie nie ma żadnych kanałów widocznych w aplikacji. Aby dokończyć konfigurację przejdź do cloud.supla.org</string>
+  <string name="add_device_needs_cloud_dismiss">Rozumiem</string>
+  <string name="add_device_needs_cloud_go">Przejdź do CLOUD</string>
+  <string name="associeted_with_at_error">Nie można zmienić funkcji kanału powiązanego z wyzwalaczem akcji.</string>
+  <string name="associeted_with_push_error">Nie można zmienić funkcji kanału powiązanego z powiadomieniami PUSH.</string>
+  <string name="associeted_with_vbt_error">Nie można zmienić funkcji kanału powiązanego z reakcjami.</string>
+  <string name="location_ordering">Kolejność lokalizacji</string>
+  <string name="rs_display_mode">Rolety, żaluzje, zasłony %</string>
+  <string name="rs_display_mode_opening">Otwarcia</string>
+  <string name="rs_display_mode_closing">Zamknięcia</string>
   <string name="status_accessid_inactive">Identyfikator dostępu nieaktywny</string>
   <string name="navbar_channels">Kanały</string>
   <string name="navbar_groups">Grupy</string>
@@ -655,7 +656,7 @@
   <string name="lock_screen_forgotten_code_title">Kod dostępu</string>
   <string name="lock_screen_forgotten_code_message">Jeśli nie pamiętasz kodu dostępu, odinstaluj aplikację z telefonu, a następnie zainstaluj ją ponownie. Po ponownej instalacji, dodaj konfigurację konta z Supla Cloud.\n\nNie zakładaj nowego konta. Dane historyczne i wszystkie urządzenia nie zostaną stracone.</string>
   <string name="lock_screen_forgotten_code_button">Rozumiem</string>
-  <string name="lock_screen_confirm_authorize_app">Zmiana zakresu autoryzacji</string>
+  <string name="lock_screen_confirm_authorize_range_change">Zmiana zakresu autoryzacji</string>
   <string name="pin_setup_use_biometric">Uwierzytelnianie biometryczne: </string>
   <string name="pin_setup_biometric_not_enrolled">Uwierzytalnienie biometryczne nie zostało skonfigurowane. Jeżeli chcesz skorzystać z biometrii skonfiguruj ją najpierw w ustawieniach systemowych.</string>
   <string name="biometric_prompt_subtitle">Odblokuj odciskiem palca</string>
@@ -715,6 +716,22 @@
   <string name="channel_btn_reveal">Odsłoń</string>
   <string name="channel_btn_collapse">Zwiń</string>
   <string name="channel_btn_expand">Rozwiń</string>
+  <string name="settings_battery_level_warning">Sygnalizacja słabej baterii</string>
+  <string name="channel_battery_level">Poziom baterii (%1$d - %2$s): %3$d%%</string>
+  <string name="counter_photo_toolbar">Zdjęcia licznika</string>
+  <string name="counter_photo_counter_area">Obszar licznika</string>
+  <string name="counter_photo_original_photo">Zdjęcie oryginalne</string>
+  <string name="counter_photo_settings">Konfiguracja w Cloud</string>
+  <string name="details_em_info_data_type">Dotknij tutaj, aby wybrać jak mają być grupowane dane (godziny, dni) lub wyświetlić rankingi.</string>
+  <string name="details_em_info_range">Tu ustawisz jaki zakres ma obejmować wyres, np. bieżący miesiąc lub ostatni rok.</string>
+  <string name="details_em_info_data_set_single_phase">Dotknij tutaj, aby zmienić rodzaj wyświetlanych danych, np. energię pobraną lub oddaną (o ile jest dostępna).</string>
+  <string name="details_em_info_swipe">Przesuń w lewo po więcej</string>
+  <string name="details_em_info_data_set_multiple_phase">Dotknij tutaj, aby wybrać co chcesz wyświetlić, np. energię zbilansowaną godzinowo lub wybrać fazy.</string>
+  <string name="details_em_voltage_phase_angle_12">Kąt między napięciami faz 1–2</string>
+  <string name="details_em_voltage_phase_angle_13">Kąt między napięciami faz 1–3</string>
+  <string name="details_em_voltage_phase_sequence">Kolejność faz napięcia</string>
+  <string name="details_em_current_phase_sequence">Kolejność faz prądu</string>
+  <string name="em_electric_grid_parameters">Parametry sieci elektrycznej</string>
 
   <plurals name="details_timer_info_on" tools:ignore="MissingQuantity">
     <item quantity="one">włączone</item>
@@ -725,7 +742,6 @@
     <item quantity="other">wyłączy</item>
   </plurals>
   <plurals name="day_pattern">
-    <item quantity="zero">%1$d dni</item>
     <item quantity="one">%1$d dzień</item>
     <item quantity="few">%1$d dni</item>
     <item quantity="many">%1$d dni</item>
